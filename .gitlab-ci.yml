@@ -1,0 +1,45 @@
+include:
+  - project: common/gitlab-ci-snippets
+    file: common.gitlab-ci.yml
+
+variables:
+  GIT_DEPTH: "200"
+
+.maven_job: &maven_job
+  before_script:
+    - export MAVEN_USER_HOME=".maven"
+    - export JAVA_OPTS=-XX:-UseGCOverheadLimit
+  cache:
+    paths:
+      - .maven/
+
+stages:
+  - lint
+  - test
+  - package
+
+commit-lint:
+  extends: .commit-lint
+
+test:
+  <<: *maven_job
+  image: openjdk:11-jdk-slim
+  only:
+    refs:
+      - branches
+      - tags
+  stage: test
+  script:
+    - ./mvnw -s ./.mvn/settings.xml test -Dmaven.repo.local=$MAVEN_USER_HOME
+
+maven-package:
+  <<: *maven_job
+  stage: package
+  image: openjdk:11-jdk-slim
+  script:
+    - ./mvnw -s ./.mvn/settings.xml verify -DskipTests -Dmaven.repo.local=$MAVEN_USER_HOME
+  artifacts:
+    paths:
+      - target/*.jar
+      - target/*.sh
+    expire_in: 12 hour
