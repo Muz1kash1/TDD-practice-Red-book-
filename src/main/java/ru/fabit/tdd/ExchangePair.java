@@ -3,8 +3,11 @@ package ru.fabit.tdd;
 import java.util.Objects;
 
 public class ExchangePair {
+  private static ExchangePair instance;
   private final Currency firstCurrency;
   private final Currency secondCurrency;
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -19,9 +22,15 @@ public class ExchangePair {
     return Objects.hash(firstCurrency, secondCurrency);
   }
 
-  public ExchangePair(Currency firstCurrency, Currency secondCurrency) {
+  private ExchangePair(Currency firstCurrency, Currency secondCurrency) {
     this.firstCurrency = firstCurrency;
     this.secondCurrency = secondCurrency;
+  }
+  public static ExchangePair getInstance(Currency firstCurrency, Currency secondCurrency){
+    if (instance == null){
+      instance = new ExchangePair(firstCurrency,secondCurrency);
+    }
+    return instance;
   }
 
 }

@@ -50,7 +50,8 @@ public class Money {
   }
 
   public Wallet plus(Money money) {
-    return new Wallet(this,money);
+    Wallet wallet = new Wallet(this,money);
+    return wallet;
   }
 }
 
