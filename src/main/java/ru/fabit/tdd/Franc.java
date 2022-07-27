@@ -1,9 +1,9 @@
 package ru.fabit.tdd;
 
-public class Dollar {
+public class Franc  {
     private final int amount;
 
-    public Dollar(int amount) {
+    public Franc(int amount) {
         this.amount = amount;
     }
 
@@ -12,9 +12,9 @@ public class Dollar {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Dollar dollar = (Dollar) o;
+        Franc franc = (Franc) o;
 
-        return amount == dollar.amount;
+        return amount == franc.amount;
     }
 
     @Override
@@ -22,17 +22,17 @@ public class Dollar {
         return amount;
     }
 
-    public Dollar times(int multiplier) {
-        return new Dollar(this.amount * multiplier);
+    public Franc times(int multiplier) {
+        return new Franc(this.amount * multiplier);
     }
 
-    public Dollar plus(Dollar another) {
-        return new Dollar(this.amount + another.amount);
+    public Franc plus(Franc another) {
+        return new Franc(this.amount + another.amount);
     }
 
     @Override
     public String toString() {
-        return "Dollar{" +
+        return "Franc{" +
                 "amount=" + amount +
                 '}';
     }

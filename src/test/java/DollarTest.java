@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import ru.fabit.tdd.Dollar;
+import ru.fabit.tdd.Franc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,6 +9,11 @@ public class DollarTest {
     @Test
     public void equals_1Usd_shouldBe_equal_1Usd(){
         assertThat(new Dollar(1)).isEqualTo(new Dollar(1));
+    }
+
+    @Test
+    public void equals_1Usd_shouldBeNotEqual_1Chf(){
+        assertThat(new Dollar(1)).isNotEqualTo(new Franc(1));
     }
 
     @Test
