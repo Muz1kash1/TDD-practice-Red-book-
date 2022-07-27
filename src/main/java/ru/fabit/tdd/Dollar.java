@@ -7,11 +7,11 @@ public class Dollar extends Money {
     }
 
     public Dollar times(int multiplier) {
-        return new Dollar(this.amount * multiplier);
+        return Money.dollar(this.amount * multiplier);
     }
 
     public Dollar plus(Dollar another) {
-        return new Dollar(this.amount + another.amount);
+        return Money.dollar(this.amount + another.amount);
     }
 
     @Override
