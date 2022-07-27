@@ -1,10 +1,17 @@
 package ru.fabit.tdd;
 
-public abstract class Money {
+public class Money {
     protected final int amount;
 
-    protected Money(int amount) {
+    protected final Currency currency;
+
+    protected Money(int amount, Currency currency) {
         this.amount = amount;
+        this.currency = currency;
+    }
+
+    public Money times(int multiplier) {
+        return new Money(this.amount * multiplier, this.currency);
     }
 
     public static Dollar dollar(int amount) {
@@ -18,16 +25,26 @@ public abstract class Money {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(o instanceof Money) ) return false;
 
-        Money dollar = (Money) o;
+        Money money = (Money) o;
 
-        return amount == dollar.amount;
+        if (amount != money.amount) return false;
+        return currency == money.currency;
     }
 
     @Override
     public int hashCode() {
-        return amount;
+        int result = amount;
+        result = 31 * result + (currency != null ? currency.hashCode() : 0);
+        return result;
     }
 
+    @Override
+    public String toString() {
+        return "Money{" +
+                "amount=" + amount +
+                ", currency=" + currency +
+                '}';
+    }
 }
