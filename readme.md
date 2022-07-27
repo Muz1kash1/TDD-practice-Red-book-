@@ -24,4 +24,4 @@ to big amount (more than int)
 2. Доделать Wallet, чтобы он мог использоваться с несколькими "стопками денег"
 3. Привнести EUR в проект, при том что 3 валюты могли конвертироваться друг в друга
 4. Сделать так, чтобы
-   `new Wallet(dollar(30), franc(20)).plus(franc(20))` работало
+   `new Wallet(Money.dollar(30), Money.franc(20)).plus(Money.franc(20))` работало
