@@ -1,54 +1,56 @@
 package ru.fabit.tdd;
 
 public class Money {
-    protected final int amount;
+  protected final double amount;
 
-    protected final Currency currency;
+  protected final Currency currency;
 
-    protected Money(int amount, Currency currency) {
-        this.amount = amount;
-        this.currency = currency;
-    }
+  protected Money(double amount, Currency currency) {
+    this.amount = amount;
+    this.currency = currency;
+  }
 
-    public Money times(int multiplier) {
-        return new Money(this.amount * multiplier, this.currency);
-    }
+  public static Money dollar(double amount) {
+    return new Money(amount,Currency.USD);
+  }
 
-    public static Dollar dollar(int amount) {
-        return new Dollar(amount);
-    }
+  public static Money franc(double amount) {
+    return new Money(amount,Currency.CHF);
+  }
 
-    public static Franc franc(int amount) {
-        return new Franc(amount);
-    }
+  public static Money euro(double amount) {
+    return new Money(amount,Currency.EUR);
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof Money) ) return false;
+  public Money times(int multiplier) {
+    return new Money(this.amount * multiplier, this.currency);
+  }
 
-        Money money = (Money) o;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || !(o instanceof Money)) return false;
 
-        if (amount != money.amount) return false;
-        return currency == money.currency;
-    }
+    Money money = (Money) o;
 
-    @Override
-    public int hashCode() {
-        int result = amount;
-        result = 31 * result + (currency != null ? currency.hashCode() : 0);
-        return result;
-    }
+    if (amount != money.amount) return false;
+    return currency == money.currency;
+  }
 
-    @Override
-    public String toString() {
-        return "Money{" +
-                "amount=" + amount +
-                ", currency=" + currency +
-                '}';
-    }
+  @Override
+  public int hashCode() {
+    int result = (int)amount;
+    result = 31 * result + (currency != null ? currency.hashCode() : 0);
+    return result;
+  }
 
-//    public Wallet plus(Dollar dollar) {
-//        return null;
-//    }
+  @Override
+  public String toString() {
+    return "Money{" + "amount=" + amount + ", currency=" + currency + '}';
+  }
+
+  public Wallet plus(Money money) {
+    return new Wallet(this,money);
+  }
 }
+

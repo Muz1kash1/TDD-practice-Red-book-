@@ -2,11 +2,18 @@ package ru.fabit.tdd;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MoneyTest {
+    private Map<ExchangePair, Double> currencyBoard = new HashMap<>();
+    {
+        currencyBoard.put(new ExchangePair(Currency.EUR,Currency.USD),1.2);
+        currencyBoard.put(new ExchangePair(Currency.CHF,Currency.USD),4.0);
+    }
 
     @Test
     public void dollar_shouldNotReturnNull() {
@@ -68,10 +75,12 @@ class MoneyTest {
         assertThat(Money.dollar(3).times(2)).isEqualTo(Money.dollar(6));
     }
 
-//    @Test
-//    public void plus_2ChfPlus4UsdAndRate4to1_shouldBe_12Usd(){
-//        assertThat(Money.franc(2).plus(Money.dollar(4))
-//                .asDollar(Set.of(ExchangePair(Currency.CHF,Currency.USD)))
-//        ).isEqualTo(Money.dollar(12));
-//    }
+    @Test
+    public void plus_2ChfPlus4UsdAndRate4to1_shouldBe_12Usd(){
+        currencyBoard.put(new ExchangePair(Currency.EUR,Currency.USD),1.2);
+        currencyBoard.put(new ExchangePair(Currency.CHF,Currency.USD),4.0);
+        assertThat(Money.franc(2).plus(Money.dollar(4))
+                .asDollar(currencyBoard)
+        ).isEqualTo(Money.dollar(12));
+    }
 }
