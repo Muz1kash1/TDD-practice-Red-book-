@@ -2,6 +2,8 @@ package ru.fabit.tdd;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MoneyTest {
@@ -65,4 +67,11 @@ class MoneyTest {
     public void multiply_3UsdTimes2_shouldBe_6Usd(){
         assertThat(Money.dollar(3).times(2)).isEqualTo(Money.dollar(6));
     }
+
+//    @Test
+//    public void plus_2ChfPlus4UsdAndRate4to1_shouldBe_12Usd(){
+//        assertThat(Money.franc(2).plus(Money.dollar(4))
+//                .asDollar(Set.of(ExchangePair(Currency.CHF,Currency.USD)))
+//        ).isEqualTo(Money.dollar(12));
+//    }
 }

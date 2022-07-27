@@ -47,4 +47,8 @@ public class Money {
                 ", currency=" + currency +
                 '}';
     }
+
+//    public Wallet plus(Dollar dollar) {
+//        return null;
+//    }
 }
