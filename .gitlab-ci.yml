@@ -37,7 +37,7 @@ maven-package:
   stage: package
   image: openjdk:11-jdk-slim
   script:
-    - ./mvnw -s ./.mvn/settings.xml verify -DskipTests -Dmaven.repo.local=$MAVEN_USER_HOME
+    - ./mvnw -s ./.mvn/settings.xml package -DskipTests -Dmaven.repo.local=$MAVEN_USER_HOME
   artifacts:
     paths:
       - target/*.jar
