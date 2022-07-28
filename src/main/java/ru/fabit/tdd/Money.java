@@ -10,18 +10,42 @@ public class Money {
     this.currency = currency;
   }
 
+  /**
+   * возвращает новый доллар
+   *
+   * @param amount
+   * @return
+   */
   public static Money dollar(double amount) {
     return new Money(amount, Currency.USD);
   }
 
+  /**
+   * возвращает новый франк
+   *
+   * @param amount
+   * @return
+   */
   public static Money franc(double amount) {
     return new Money(amount, Currency.CHF);
   }
 
+  /**
+   * возвращает новый евро
+   *
+   * @param amount
+   * @return
+   */
   public static Money euro(double amount) {
     return new Money(amount, Currency.EUR);
   }
 
+  /**
+   * производит умножение денег
+   *
+   * @param multiplier
+   * @return
+   */
   public Money times(int multiplier) {
     return new Money(this.amount * multiplier, this.currency);
   }
@@ -49,6 +73,12 @@ public class Money {
     return "Money{" + "amount=" + amount + ", currency=" + currency + '}';
   }
 
+  /**
+   * Возвращает новый кошелёк с этой стопкой денег и с данной стопкой денег
+   *
+   * @param money
+   * @return
+   */
   public Wallet plus(Money money) {
     Wallet wallet = new Wallet(this, money);
     return wallet;

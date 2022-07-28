@@ -26,6 +26,12 @@ public class Wallet {
     return moneyList.equals(wallet.moneyList);
   }
 
+  /**
+   * Возвращает новый кошелёк с стопками денег которые уже были внутри и с новой стопкой денег
+   *
+   * @param money
+   * @return
+   */
   public Wallet plus(Money money) {
     List<Money> newlist = new ArrayList<>();
     for (Money member : moneyList) {
@@ -35,7 +41,10 @@ public class Wallet {
     Money[] args = newlist.toArray(new Money[0]);
     return new Wallet(args);
   }
-
+  /**
+   * Переводит денежный объект в денежный объект с указанным типом валюты по текущим курсам из
+   * currencyBoard
+   */
   public Money asCurrency(Map<ExchangePair, Double> currencyBoard, Currency currency) {
     double amount = 0.0;
 
