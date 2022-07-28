@@ -7,7 +7,10 @@ public class ExchangePair {
   private final Currency firstCurrency;
   private final Currency secondCurrency;
 
-
+  public ExchangePair(Currency firstCurrency, Currency secondCurrency) {
+    this.firstCurrency = firstCurrency;
+    this.secondCurrency = secondCurrency;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -22,15 +25,11 @@ public class ExchangePair {
     return Objects.hash(firstCurrency, secondCurrency);
   }
 
-  private ExchangePair(Currency firstCurrency, Currency secondCurrency) {
-    this.firstCurrency = firstCurrency;
-    this.secondCurrency = secondCurrency;
-  }
-  public static ExchangePair getInstance(Currency firstCurrency, Currency secondCurrency){
-    if (instance == null){
-      instance = new ExchangePair(firstCurrency,secondCurrency);
-    }
-    return instance;
+  public Currency getFirstCurrency() {
+    return firstCurrency;
   }
 
+  public Currency getSecondCurrency() {
+    return secondCurrency;
+  }
 }

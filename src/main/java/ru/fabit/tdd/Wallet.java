@@ -1,11 +1,8 @@
 package ru.fabit.tdd;
 
-import java.awt.geom.QuadCurve2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Supplier;
 
 public class Wallet {
   private List<Money> moneyList;
@@ -30,19 +27,46 @@ public class Wallet {
   }
 
   public Wallet plus(Money money) {
-    moneyList.add(money);
-    return this;
+    List<Money> newlist = new ArrayList<>();
+    for (Money member : moneyList) {
+      newlist.add(member);
+    }
+    newlist.add(money);
+    Money[] args = newlist.toArray(new Money[0]);
+    return new Wallet(args);
   }
 
-  public Money asDollar(Map<ExchangePair, Double> currencyBoard) {
+  public Money asCurrency(Map<ExchangePair, Double> currencyBoard, Currency currency) {
     double amount = 0.0;
+
     for (Money money : moneyList) {
-      if(currencyBoard.containsKey(ExchangePair.getInstance(money.currency, Currency.USD))){
-        amount += money.amount * currencyBoard.get(ExchangePair.getInstance(money.currency, Currency.USD));
+
+      if (money.currency == currency) {
+        amount += money.amount;
+
+        continue;
+      }
+      for (Map.Entry<ExchangePair, Double> entry : currencyBoard.entrySet()) {
+
+        if (entry.getKey().getFirstCurrency() == (money.currency)
+            && entry.getKey().getSecondCurrency() == (currency)) {
+
+          amount += money.amount * entry.getValue();
+
+          continue;
+        }
       }
     }
-
-    return Money.dollar(amount);
+    switch (currency) {
+      case USD:
+        return Money.dollar(amount);
+      case CHF:
+        return Money.franc(amount);
+      case EUR:
+        return Money.euro(amount);
+      default:
+        return Money.dollar(amount);
+    }
   }
 
   @Override

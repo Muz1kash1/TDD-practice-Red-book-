@@ -11,15 +11,15 @@ public class Money {
   }
 
   public static Money dollar(double amount) {
-    return new Money(amount,Currency.USD);
+    return new Money(amount, Currency.USD);
   }
 
   public static Money franc(double amount) {
-    return new Money(amount,Currency.CHF);
+    return new Money(amount, Currency.CHF);
   }
 
   public static Money euro(double amount) {
-    return new Money(amount,Currency.EUR);
+    return new Money(amount, Currency.EUR);
   }
 
   public Money times(int multiplier) {
@@ -39,7 +39,7 @@ public class Money {
 
   @Override
   public int hashCode() {
-    int result = (int)amount;
+    int result = (int) amount;
     result = 31 * result + (currency != null ? currency.hashCode() : 0);
     return result;
   }
@@ -50,8 +50,7 @@ public class Money {
   }
 
   public Wallet plus(Money money) {
-    Wallet wallet = new Wallet(this,money);
+    Wallet wallet = new Wallet(this, money);
     return wallet;
   }
 }
-
